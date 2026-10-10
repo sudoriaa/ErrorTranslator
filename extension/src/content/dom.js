@@ -188,7 +188,9 @@
           isolatedStyle(group.source,`display:inline-block!important;width:${width}px!important;vertical-align:middle!important;`);
           const output=createOutput(group,text,language,'inline');isolatedStyle(output,'display:inline-block!important;flex-shrink:0!important;margin-inline-start:8px!important;white-space:nowrap!important;');slot.append(output);return;
         }
-        isolatedStyle(slot,`display:inline-block!important;position:relative!important;width:${width}px!important;max-width:100%!important;height:${height}px!important;vertical-align:middle!important;line-height:${height}px!important;`);
+        // Top alignment keeps a full-height slot within the existing line box.
+        // Middle alignment can expand it with fonts such as Segoe UI.
+        isolatedStyle(slot,`display:inline-block!important;position:relative!important;width:${width}px!important;max-width:100%!important;height:${height}px!important;vertical-align:top!important;line-height:${height}px!important;`);
         isolatedStyle(group.source,`display:block!important;position:absolute!important;inset:0 0 auto!important;font-size:${Math.min(font,height*.46)}px!important;line-height:${height/2}px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;`);
         const output=createOutput(group,text,language,'compact');
         isolatedStyle(output,`display:block!important;position:absolute!important;inset:auto 0 0!important;max-width:100%!important;font-size:${Math.min(font,height*.46)}px!important;line-height:${height/2}px!important;`);
