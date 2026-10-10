@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Error Translator - 艾拉网页翻译",
+  "short_name": "艾拉网页翻译",
+  "version": "1.2.1",
+  "homepage_url": "https://github.com/sudoriaa/ErrorTranslator",
+  "description": "读懂每一种语言。AI 全页翻译、原文对照和悬停翻译，自由连接你的翻译供应商。",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Error Translator · 艾拉网页翻译",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "options.html",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'"
+  }
+}

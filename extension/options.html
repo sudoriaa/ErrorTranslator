@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>设置 · Error Translator - 艾拉网页翻译</title><link rel="stylesheet" href="ui.css"></head>
+<body class="options">
+  <aside class="sidebar"><a class="brand" href="#providers"><span class="brand-icon">E<span>↗</span></span><div><strong>Error Translator</strong><small>艾拉网页翻译</small></div></a><div class="nav-label">你的翻译工作台</div><nav><button class="nav-item active" data-panel="providers"><span>▦</span>翻译供应商<span class="nav-count" id="provider-count">0</span></button><button class="nav-item" data-panel="preferences"><span>☷</span>阅读与精度</button><button class="nav-item" data-panel="about"><span>ⓘ</span>关于艾拉</button></nav><div class="sidebar-bottom"><div class="sidebar-motif">A<span>あ</span><i>文</i></div><p>让语言成为桥梁。</p><small>Read beyond boundaries.</small><div class="version">VERSION 1.2.1 <span>MV3</span></div></div></aside>
+  <div class="workspace"><header class="topbar"><span>设置 <span class="breadcrumb">/</span> <span id="breadcrumb-current">翻译供应商</span></span><span class="private-badge"><span class="status-dot"></span>配置仅保存在本机</span></header>
+  <main class="options-main">
+    <section id="panel-providers" class="panel">
+      <div class="page-heading"><div><div class="eyebrow">YOUR WORDS, YOUR CHOICE</div><h1>连接你的翻译世界<span class="accent">。</span></h1><p>从熟悉的供应商开始，或连接你自己的 AI 服务。</p></div><button class="primary" id="add-custom">＋ 自定义供应商</button></div>
+      <div class="section-heading large"><h2>我的供应商 <span id="connected-count" class="count">0</span></h2><span>自由切换 · 独立配置</span></div>
+      <div id="saved-providers" class="saved-providers"></div>
+      <div class="empty-state" id="empty-state"><div class="empty-icon">↗</div><div><h3>下一段阅读，从这里开始</h3><p>选择下方预设，填写密钥后即可翻译网页。</p></div><span class="outline-label">READY WHEN YOU ARE</span></div>
+      <div class="section-heading large preset-heading"><h2>快速连接</h2><span>基于供应商官方 API</span></div>
+      <div id="presets" class="preset-grid"></div>
+      <div class="provider-editor card" id="provider-editor" hidden>
+        <div class="editor-heading"><div><div class="eyebrow">CONNECTION DETAILS</div><h2 id="editor-title">配置供应商</h2></div><button class="icon-button" id="close-editor" aria-label="关闭供应商编辑器">×</button></div>
+        <form id="provider-form">
+          <div class="form-grid"><label>供应商名称<input id="provider-name" required maxlength="80" placeholder="给这个连接起个名字"></label><label>接口类型<select id="provider-type"><option value="ai">AI · Chat Completions 兼容</option><option value="responses">AI · Responses 兼容</option><option value="google">Google Cloud Translation Basic</option><option value="deepl">DeepL API</option><option value="baidu">百度通用文本翻译</option></select></label></div>
+          <label class="field">API 地址<input id="api-url" type="url" required placeholder="https://your-service.example/v1"><small id="url-hint">填写基础地址，或完整的 /chat/completions 地址。</small></label>
+          <div class="form-grid"><label>API Key / 密钥<div class="input-with-button"><input id="api-key" type="password" autocomplete="off" placeholder="填写供应商密钥"><button type="button" id="toggle-key" class="text-button" aria-label="显示密钥">显示</button></div><small>仅存于本机，不会传给网页或其他供应商。</small></label><label id="app-id-field" hidden>百度 APP ID<input id="app-id" autocomplete="off" placeholder="从百度翻译开放平台获取"></label><label id="model-field">模型<div class="input-with-button"><input id="model" list="model-list" placeholder="手动填写或从上游获取"><button type="button" id="fetch-models" class="text-button">获取模型 ↓</button></div><datalist id="model-list"></datalist><small>上游不支持模型列表时，可直接填写模型 ID。</small></label></div>
+          <div class="editor-note" id="editor-note"></div>
+          <div class="editor-actions"><a id="provider-docs" class="text-button" target="_blank" rel="noopener noreferrer">官方文档 ↗</a><div><button type="button" id="test-provider" class="secondary">测试连接</button><button type="submit" class="primary">保存连接 ↗</button></div></div>
+        </form>
+      </div>
+      <div class="bottom-note"><span>◇</span><p>网页内容仅发送给你选择的供应商。API 费用与额度由对应供应商管理。<br>Google、DeepL 与百度需要开通各自的官方 API 服务，网站会员不等于 API 权限。</p></div>
+    </section>
+    <section id="panel-preferences" class="panel" hidden>
+      <div class="page-heading"><div><div class="eyebrow">A BETTER WAY TO READ</div><h1>让每一句，更贴近原意<span class="accent">。</span></h1><p>保存你的阅读偏好，让艾拉理解你在意的细节。</p></div></div>
+      <div class="card about-card"><h2>只交付译文</h2><p>每批多个元素合并到一个请求，严格校验 JSON 段落编号与纯译文。原文 hello world 只交付「你好世界」。异常输出自动纠正重试，仍不合格则保留原文；开启「译文自检」可增加一次独立复核。</p></div>
+      <form id="preferences-form"><div class="card preference-card">
+        <div class="section-heading"><h2>请求节奏与超时</h2><button type="button" id="request-recommended" class="text-button">填入建议值 ↗</button></div>
+        <div class="form-grid">
+          <label>并发请求数<input id="pref-concurrency" type="number" inputmode="numeric" min="1" max="20" step="1" required><small>建议 5 个，可填写 1–20；供应商限流时降至 1–2。</small></label>
+          <label>每批最多文本段数<input id="pref-batchSize" type="number" inputmode="numeric" min="1" max="64" step="1" required><small>建议 16 段，可填写 1–64；长文本建议 8–16 段。</small></label>
+          <label>单次请求超时（秒）<input id="pref-requestTimeout" type="number" inputmode="numeric" min="10" max="600" step="1" required><small>建议 120 秒，可填写 10–600；慢模型可设为 180–300 秒。</small></label>
+          <label>请求发起间隔（毫秒）<input id="pref-requestInterval" type="number" inputmode="numeric" min="0" max="10000" step="1" required><small>建议 350 毫秒，可填写 0–10000；限制新请求的发起频率。</small></label>
+        </div>
+        <p class="queue-note">例如 5 并发 × 每批 16 段：最多同时处理 5 个批次。所有页面共用并发上限；长文本按长度进一步拆批。百度保持逐段串行限速。超时从请求开始计时，不含排队等待；保存后下次翻译、模型获取或连接测试生效。</p>
+      </div><div class="card preference-card"><div class="section-heading"><h2>阅读默认值</h2><span>下次打开菜单时使用</span></div><div class="form-grid"><label>源语言<select id="pref-source"></select></label><label>目标语言<select id="pref-target"></select></label><label>翻译模式<select id="pref-mode"><option value="bilingual">对照翻译 · 自动适配原文布局</option><option value="full">全页翻译 · 替换网页原文</option><option value="hover">悬停翻译 · 原位替换，移开 2 秒后恢复</option></select></label><label>AI 翻译风格<select id="pref-style"><option value="natural">自然流畅</option><option value="literal">忠实严谨</option><option value="formal">正式专业</option></select></label></div><label class="switch-row separated"><span><strong>翻译动态内容</strong><small>自动跟进网页中新加载或更新的文本</small></span><input type="checkbox" id="pref-dynamic" class="switch"></label></div>
+      <div class="card preference-card"><div class="section-heading"><h2>精度增强</h2><span class="ai-badge">仅 AI 翻译</span></div><label class="switch-row"><span><strong>结合上下文</strong><small>结合页面标题与相邻段落，减少歧义</small></span><input type="checkbox" id="pref-context" class="switch"></label><label class="switch-row"><span><strong>术语一致性</strong><small>保持专业表达一致，并应用下方术语表</small></span><input type="checkbox" id="pref-terminology" class="switch"></label><label class="switch-row"><span><strong>保留专有名称</strong><small>保留品牌、产品、变量名称，避免过度翻译</small></span><input type="checkbox" id="pref-preserveNames" class="switch"></label><label class="switch-row"><span><strong>译文自检</strong><small>额外请求一次独立复核，检查否定、数字、遗漏与误译，增加费用和耗时</small></span><input type="checkbox" id="pref-proofread" class="switch"></label><label class="field glossary-label">你的术语表<textarea id="pref-glossary" rows="5" maxlength="6000" placeholder="每行一个术语，例如：&#10;machine learning = 机器学习&#10;deployment = 部署"></textarea><small>术语一致性开启时生效，随翻译请求发送给所选 AI。</small></label></div><button type="submit" class="primary">保存阅读偏好 ↗</button></form>
+    </section>
+    <section id="panel-about" class="panel" hidden><div class="page-heading"><div><div class="eyebrow">LESS BARRIER. MORE UNDERSTANDING.</div><h1>Error Translator<span class="accent">。</span></h1><p>艾拉网页翻译 · 为每一次好奇，打开一扇窗。</p></div><span class="brand-icon hero-icon">E<span>↗</span></span></div><div class="card about-card"><h2>开始使用</h2><ol><li>在「翻译供应商」中连接至少一个服务，填写官方 API 密钥并保存。</li><li>打开普通网页，点击 Chrome 工具栏中的艾拉图标。</li><li>选择目标语言、供应商和阅读方式，点击「翻译当前网页」。</li><li>随时切换模式，或点击「恢复原文」还原页面。</li></ol><h2>翻译与数据</h2><p>注释、代码块、代码编辑器、表单和可编辑区域始终跳过；链接和已有 DOM 保留。仅翻译可见的文字，不翻译图片中的文字。支持开放 Shadow DOM 与同源 iframe；跨域 iframe、浏览器内部页面、Chrome 商店和内置 PDF 阅读器无法翻译。</p><p>源语言「自动检测」交由所选供应商逐段识别，可用于混合语言网页。悬停模式先分组翻译整页，鼠标移入后在原位置替换成译文，移开 2 秒后恢复原文。</p><p>密钥只保存在此浏览器的扩展本地存储中，不通过 Chrome 同步。网页无法读取密钥。翻译缓存只驻留后台内存，后台休眠或浏览器关闭后清空。你的网页文本及开启的 AI 上下文会发送给所选供应商；不要将敏感网页交给不信任的服务。</p><button id="clear-cache" class="secondary">清空翻译缓存</button></div><div class="card about-card"><h2>配置备份</h2><p>导出包含供应商地址、模型与阅读偏好，不包含 API Key 或百度 APP ID。导入后需要重新填写凭据并授权 API 地址。</p><div class="backup-actions"><button class="secondary" id="export-config">导出配置</button><button class="secondary" id="import-config">导入配置</button><input type="file" id="import-file" accept="application/json,.json" hidden></div></div><p class="about-version">Error Translator - 艾拉网页翻译 · 1.2.1 · Chrome Manifest V3</p></section>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  </main><footer class="options-footer"><span>Made for the curious.</span><span>ERROR TRANSLATOR / 艾拉网页翻译</span></footer></div>
+  <script type="module" src="src/options.js"></script>
+</body></html>

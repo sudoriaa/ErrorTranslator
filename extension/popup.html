@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>艾拉网页翻译</title><link rel="stylesheet" href="ui.css"></head>
+<body class="popup">
+  <header class="popup-header"><div class="brand"><span class="brand-icon">E<span>↗</span></span><div><strong>Error Translator</strong><small>艾拉网页翻译</small></div></div><button class="icon-button" id="open-settings" title="打开设置" aria-label="打开设置">⚙</button></header>
+  <main>
+    <div class="page-context"><span class="status-dot"></span><span id="page-host">当前网页</span><span class="local-tag">PAGE</span></div>
+    <section class="language-card"><label>源语言<select id="source" aria-label="源语言"></select></label><button class="swap-button" id="swap" aria-label="交换源语言与目标语言" title="交换语言">⇄</button><label>翻译成<select id="target" aria-label="目标语言"></select></label></section>
+    <section class="section"><div class="section-heading"><h2>阅读方式</h2><span>让理解，顺其自然</span></div><div class="mode-grid" role="radiogroup" aria-label="翻译模式">
+      <button class="mode" data-mode="full" role="radio" aria-checked="false"><span class="mode-symbol">文<span>↗</span></span><strong>全页翻译</strong><small>直接阅读译文</small></button>
+      <button class="mode selected" data-mode="bilingual" role="radio" aria-checked="true"><span class="mode-symbol">≋</span><strong>对照翻译</strong><small>原文下方读译文</small></button>
+      <button class="mode" data-mode="hover" role="radio" aria-checked="false"><span class="mode-symbol">⌁</span><strong>悬停翻译</strong><small>移开 2 秒后恢复</small></button>
+    </div></section>
+    <section class="section"><div class="section-heading"><h2>翻译供应商</h2><button class="text-button" id="manage-providers">管理 ↗</button></div><div class="provider-select"><span class="provider-mark" id="provider-mark">+</span><select id="provider" aria-label="翻译供应商"><option value="">添加你的第一个供应商</option></select><span class="provider-kind" id="provider-kind">AI</span></div><p class="provider-meta" id="provider-meta">连接你信任的 AI 或翻译服务</p></section>
+    <section class="section precision"><div class="section-heading"><h2>翻译精度</h2><span class="ai-badge">AI 专属</span></div>
+      <label class="switch-row"><span><strong>结合上下文</strong><small>理解标题、段落与前后文</small></span><input type="checkbox" id="context" class="switch"></label>
+      <div class="compact-switches"><label>术语一致<input type="checkbox" id="terminology" class="switch"></label><label>保留专名<input type="checkbox" id="preserveNames" class="switch"></label><label>译文自检<input type="checkbox" id="proofread" class="switch"></label></div>
+      <p id="precision-note" class="microcopy">默认分组合并请求；译文自检开启时增加独立复核。</p>
+    </section>
+    <div class="progress-message" id="message" role="status" aria-live="polite"></div><div class="progress-track" hidden id="progress-track"><div id="progress-bar"></div></div>
+    <button class="primary translate-button" id="translate"><span>翻译当前网页</span><span aria-hidden="true">↗</span></button>
+    <div class="popup-actions"><button class="text-button" id="restore">↶ 恢复原文</button><button class="text-button" id="stop" hidden>停止翻译</button><span id="protected-note">代码与注释始终保留</span></div>
+  </main>
+  <footer class="popup-footer"><span>LESS BARRIER. MORE UNDERSTANDING.</span><span>v1.2.1</span></footer>
+  <script type="module" src="src/popup.js"></script>
+</body></html>

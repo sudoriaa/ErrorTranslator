@@ -1,0 +1,17 @@
+node_modules/
+dist/
+test-results/
+*.log
+
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

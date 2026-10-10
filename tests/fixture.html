@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Reading beyond boundaries</title><style>body{font:18px/1.8 system-ui;max-width:740px;padding:35px;margin:auto;background:#faf9f6;color:#242b2b}pre{background:#e9e7e0;padding:15px}td{border:1px solid #ccc;padding:12px}</style></head><body>
+<h1>Reading beyond boundaries</h1><p id="simple">Hello world. A better way to read.</p>
+<p id="inline">Read <a id="link" href="#simple">the original article</a> and <strong>keep its structure</strong>.</p>
+<!-- Do not translate this comment -->
+<pre id="pre">const message = "Do not translate source code";<code>console.log(message);</code></pre>
+<p id="inline-code">Use <code id="code">npm install</code> to install dependencies.</p>
+<div class="highlight" id="highlight">highlighted code should stay unchanged</div>
+<div class="monaco-editor" id="editor">editor source should stay unchanged</div>
+<p translate="no" id="no-translate">Never translate this paragraph.</p><p class="notranslate">Leave me alone.</p>
+<div contenteditable="true" id="editable">The user is writing here.</div><input id="input" value="Sensitive input value"><textarea id="textarea">Do not translate this form.</textarea>
+<p hidden>Hidden text should not be sent.</p><p style="display:none">Invisible text should not be sent.</p>
+<table><tbody><tr><td id="cell">Table cell text.</td></tr></tbody></table>
+<div id="mixed">Before a nested block.<p id="nested">Inside the nested block.</p>After a nested block.</div>
+<p id="spaced"><span>First</span> <strong>second</strong>!</p>
+<div id="shadow"></div><iframe id="frame" srcdoc="<p id='frame-text'>Same origin iframe text.</p>"></iframe>
+<div id="dynamic"></div><script>document.querySelector('#shadow').attachShadow({mode:'open'}).innerHTML='<p id="shadow-text">Open shadow text.</p>';</script>
+</body></html>
